@@ -1,0 +1,111 @@
+到官方網站下載
+
+載點 – https://git-scm.com/download/win
+
+安裝完成後，打開本機的終端機視窗
+
+$ git --version
+git version 2.27.0.windows.1
+
+
+終端機常用指令
+個人比較常用 Linux 的 BASH 當做 Shell，
+指令也比較簡潔好用
+
+Windows	Linux	說明
+cd	cd	切換目錄
+pwd	pwd	顯示目前目錄
+dir	ls	列出檔案清單
+mkdir	mkdir	建立新的目錄
+touch	新增檔案
+copy	rm	刪除檔案
+move	cp	複製檔案
+del	mv	移動或重新命名檔案
+cls	clear	清空終端機
+
+設定 User name 和 Email
+
+$ git config --global user.name ""
+$ git config --global user.email "eddie@5xruby.tw"
+
+新增專案
+在 github 上開一個新的 repository
+
+Clone 專案
+複製專案 clone 的網址
+
+clone 到本地端
+
+$ git clone 網址
+
+$ cd 專案目錄
+推回 github
+本地專案修改完後，要推回遠端專案
+
+$ git add -A
+
+$ git commit -m "註解"
+
+$ git push origin master
+
+與遠端專案同步
+同步 github 上的版本，把專案抓下來後和本地專案合併
+
+$ git pull
+
+介
+github 的共同合作是以組織帳號為基礎
+
+團隊成員修改 fork 的專案後發送 pull request
+
+再由組織管理員接受 pull request 並合併到原始專案
+
+建立組織
+建立組織帳號
+
+在 github 的 setting 內新增 organization
+此時，建立該組織的個人帳號為組織的管理員
+新增 se109a
+在組織下新增專案
+
+新增 se109a / mylodash
+團隊成員 fork 該專案並 clone 到本地端
+
+fork 產生 asd153866714 / hcxing-se109a
+原始專案產生變動
+假設組織管理員新增了檔案 tail.ts，並要求團隊成員完成函數 tail( ) 的程式碼
+export function tail(list: any[]): any[]{
+    // to do
+}
+push 回遠端的原始專案
+個人 fork 的專案跟上原始專案的進度
+設定原始專案的遠端節點
+$ git remote add upstream 上游專案網址
+抓取原始專案的內容
+$ git fetch upstream
+和本地專案的 master 分支合併
+$ git merge upstream/master
+完成函數 tail( ) 的程式碼
+export function tail(list: any[]): any[]{
+    let length = list.length
+    if (!length) return []
+
+    let index = 0
+    let result = new Array()
+
+    while (index+1 < length) {
+        result[index] = list[index + 1]
+        index++
+    }
+    return result
+}
+push 回遠端的 fork 專案
+$ git add -A
+
+$ git commit -m "modify tail.ts"
+
+$ git push
+產生 Pull Request
+fork 專案新增 pull request
+原始專案的管理員接受 pull request，並和原始專案合併
+
